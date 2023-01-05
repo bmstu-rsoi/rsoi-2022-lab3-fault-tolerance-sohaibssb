@@ -24,8 +24,7 @@ services:
     build: lab3/carsservice
     container_name: carsservice
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
@@ -39,8 +38,7 @@ services:
     build: lab3/paymentservice
     container_name: paymentservice
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
@@ -54,8 +52,7 @@ services:
     build: lab3/rentalservice
     container_name: rentalservice
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
@@ -69,8 +66,10 @@ services:
     build: lab3/gatewayservice
     container_name: gatewayservice
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
+      - paymentservice
+      - carsservice
+      - rentalservice
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
