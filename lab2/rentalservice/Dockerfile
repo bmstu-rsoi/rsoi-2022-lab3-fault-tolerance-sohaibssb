@@ -4,7 +4,7 @@ COPY requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt
 
-COPY / /lab3/
-WORKDIR /lab3
+COPY / /lab2/
+WORKDIR /lab2
 
 CMD ["python3", "main.py"]
