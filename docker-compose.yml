@@ -21,11 +21,10 @@ services:
       retries: 2
 
   carsservice:
-    build: lab2/carsservice
+    build: lab3/carsservice
     container_name: carsservice
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
@@ -36,11 +35,10 @@ services:
       - "8070:8070"
 
   paymentservice:
-    build: lab2/paymentservice
+    build: lab3/paymentservice
     container_name: paymentservice
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
@@ -51,11 +49,10 @@ services:
       - "8050:8050"
 
   rentalservice:
-    build: lab2/rentalservice
+    build: lab3/rentalservice
     container_name: rentalservice
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
@@ -66,11 +63,13 @@ services:
       - "8060:8060"
 
   gatewayservice:
-    build: lab2/gatewayservice
+    build: lab3/gatewayservice
     container_name: gatewayservice
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
+      - paymentservice
+      - carsservice
+      - rentalservice
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
