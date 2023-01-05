@@ -61,7 +61,7 @@ services:
     ports:
       - "8060:8060"
     volumes:
-      - .:/app/rentalservice
+      - .:/lab3/rentalservice
     depends_on:
       - postgres-dbs
 volumes:
