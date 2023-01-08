@@ -2,13 +2,13 @@ import os
 import json
 import time
 
-from quart import Blueprint, Response, request
+from quart import Blueprint, Response
 from .serviceorders import delete_data_from_service, post_data_from_service
 
-delete_rental_blueprint = Blueprint('delete_rental', __name__, )
+deleterentalb = Blueprint('delete_rental', __name__, )
 
 
-@delete_rental_blueprint.route('/api/v1/rental/<string:rentalUid>', methods=['DELETE'])
+@deleterentalb.route('/api/v1/rental/<string:rentalUid>', methods=['DELETE'])
 async def delete_rental(rentalUid: str) -> Response:
     response = delete_data_from_service(
         'http://' + os.environ['RENTAL_SERVICE_HOST'] + ':' + os.environ['RENTAL_SERVICE_PORT']
